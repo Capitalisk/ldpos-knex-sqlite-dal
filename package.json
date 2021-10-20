@@ -1,5 +1,5 @@
 {
-  "name": "ldpos-knex-sqlite-dal",
+  "name": "ldpos-sqlite-dal",
   "version": "4.4.1",
   "description": "Knex Postgres Data Access Layer for LDPoS",
   "main": "src/index.js",
