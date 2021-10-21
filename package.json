@@ -4,19 +4,12 @@
   "description": "Knex Postgres Data Access Layer for LDPoS",
   "main": "src/index.js",
   "scripts": {
-    "test:pg": "mocha test/integration --reporter spec --timeout 10000 --slow 10000 -r chai/register-expect",
-    "test:sqlite": "USE_SQLITE=true mocha test/integration --reporter spec --timeout 10000 --slow 10000 -r chai/register-expect",
+    "test:sqlite": "mocha test/integration --reporter spec --timeout 10000 --slow 10000 -r chai/register-expect",
     "migrate:make": "knex migrate:make",
     "migrate": "knex migrate:latest",
     "migrate:rollback": "knex migrate:rollback",
     "seed:make": "knex seed:make",
-    "seed": "knex seed:run",
-    "start:db": "docker-compose up db",
-    "stop:db": "docker-compose stop db && docker-compose rm -f db",
-    "reset:db": "yarn stop:db && yarn start:db",
-    "start:pgadmin": "docker-compose up pgadmin",
-    "stop:pgadmin": "docker-compose stop pgadmin && docker-compose rm -f pgadmin",
-    "reset:pgadmin": "yarn stop:pgadmin && yarn start:pgadmin"
+    "seed": "knex seed:run"
   },
   "repository": {
     "type": "git",
@@ -40,9 +33,6 @@
   },
   "dependencies": {
     "knex": "^0.95.11",
-    "pg": "^8.5.1"
-  },
-  "optionalDependencies": {
     "sqlite3": "git+https://github.com/sacOO7/node-sqlite3.git"
   }
 }

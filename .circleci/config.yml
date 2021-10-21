@@ -49,16 +49,6 @@ jobs:
           command: |
             ./wait-for-it.sh -h localhost -p 5432 -t 60
       - run:
-          name: Run postgres integration tests
-          command: |
-            set +e
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-            nvm use 12.18.2
-            yarn install
-            yarn test:pg
-      - run:
           name: Cleanup
           command: |
             set +e

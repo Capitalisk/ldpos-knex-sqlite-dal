@@ -26,12 +26,10 @@ class DalParser {
     ];
     let parsers = [(account) => numberParser(account, bigIntegerFields)];
 
-    if (this.knexClient.isSqliteClient()) {
-      const integerFields = [
-        accountsTable.field.requiredSignatureCount,
-      ];
-      parsers.push((account) => numberParser(account, integerFields));
-    }
+    const integerFields = [
+      accountsTable.field.requiredSignatureCount,
+    ];
+    parsers.push((account) => numberParser(account, integerFields));
 
     return parsers;
   };
@@ -60,13 +58,12 @@ class DalParser {
       (txn) => textToArray(txn, textArrayFields),
     ];
 
-    if (this.knexClient.isSqliteClient()) {
-      const integerFields = [
-        transactionsTable.field.indexInBlock,
-        transactionsTable.field.requiredSignatureCount,
-      ];
-      parsers.push((txn) => numberParser(txn, integerFields));
-    }
+    const integerFields = [
+      transactionsTable.field.indexInBlock,
+      transactionsTable.field.requiredSignatureCount,
+    ];
+    parsers.push((txn) => numberParser(txn, integerFields));
+
     return parsers;
   };
 
@@ -87,18 +84,17 @@ class DalParser {
       removePrivateBlockField,
     ];
 
-    if (this.knexClient.isSqliteClient()) {
-      const booleanFields = [
-        blocksTable.field.active,
-      ];
-      const integerFields = [
-        blocksTable.field.numberOfTransactions,
-      ];
-      parsers.push(
-        (block) => numberParser(block, integerFields),
-        (block) => booleanParser(block, booleanFields),
-      );
-    }
+    const booleanFields = [
+      blocksTable.field.active,
+    ];
+    const integerFields = [
+      blocksTable.field.numberOfTransactions,
+    ];
+    parsers.push(
+      (block) => numberParser(block, integerFields),
+      (block) => booleanParser(block, booleanFields),
+    );
+
     return parsers;
   };
 
@@ -111,14 +107,12 @@ class DalParser {
 
   generateBallotsTableParser() {
     let parsers = [];
-    if (this.knexClient.isSqliteClient()) {
-      const booleanFields = [
-        ballotsTable.field.active,
-      ];
-      parsers.push(
-        (ballot) => booleanParser(ballot, booleanFields),
-      );
-    }
+    const booleanFields = [
+      ballotsTable.field.active,
+    ];
+    parsers.push(
+      (ballot) => booleanParser(ballot, booleanFields),
+    );
     return parsers;
   };
 
