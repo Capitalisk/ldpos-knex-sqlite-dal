@@ -1,5 +1,5 @@
-# ldpos-knex-dal
-Knex Data Access Layer for LDPoS.
+# ldpos-sqlite-dal
+SQLite Dat Access Layer for LDPoS.
 
 ## Install docker
 - Install [docker-engine](https://docs.docker.com/engine/install/) or [docker-desktop](https://docs.docker.com/docker-for-windows/install/)
