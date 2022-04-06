@@ -456,7 +456,6 @@ class DAL {
     let {transactions, signatures, ...pureBlock} = block;
     pureBlock.signatures = Buffer.from(JSON.stringify(signatures), 'utf8').toString('base64');
     pureBlock.synched = synched || false;
-    await this.blocksRepo.upsert(pureBlock, blocksTable.field.height);
     for (let [index, transaction] of transactions.entries()) {
       let updatedTransaction = {
         ...transaction
@@ -481,6 +480,7 @@ class DAL {
       updatedTransaction[transactionsTable.field.indexInBlock] = index;
       await this.transactionsRepo.upsert(updatedTransaction);
     }
+    await this.blocksRepo.upsert(pureBlock, blocksTable.field.height);
   }
 
   async getMaxBlockHeight() {
