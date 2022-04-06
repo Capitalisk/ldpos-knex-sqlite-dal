@@ -1,11 +1,11 @@
-const {isNullOrUndefined} = require('../utils');
+let {isNullOrUndefined} = require('../utils');
 
-const applyParserForEach = (objects, ...parsers) => {
+let applyParserForEach = (objects, ...parsers) => {
   return objects.map(obj => parsers.reduce((parsedObj, parser) => parser(parsedObj), obj));
 };
 
 // boolean parser for sqlite
-const booleanParser = (obj, keys) => {
+let booleanParser = (obj, keys) => {
   for (key of keys) {
     if (key in obj && !isNullOrUndefined(obj[key])) {
       obj[key] = obj[key] === "1"
@@ -15,7 +15,7 @@ const booleanParser = (obj, keys) => {
 };
 
 // responsible for parsing string into integer values
-const numberParser = (obj, keys) => {
+let numberParser = (obj, keys) => {
   for (key of keys) {
     if (key in obj && !isNullOrUndefined(obj[key])) {
       obj[key] = parseInt(obj[key], 10);
@@ -24,7 +24,7 @@ const numberParser = (obj, keys) => {
   return obj;
 };
 
-const base64ObjParser = (obj, keys) => {
+let base64ObjParser = (obj, keys) => {
   for (key of keys) {
     if (key in obj && !isNullOrUndefined(obj[key])) {
       obj[key] = JSON.parse(
@@ -35,7 +35,7 @@ const base64ObjParser = (obj, keys) => {
   return obj;
 };
 
-const sanitizeTransaction = (txn) => {
+let sanitizeTransaction = (txn) => {
   let props = Object.keys(txn);
   for (let prop of props) {
     if (txn[prop] == null) {
@@ -45,12 +45,12 @@ const sanitizeTransaction = (txn) => {
   return txn;
 };
 
-const removePrivateBlockField = (block) => {
+let removePrivateBlockField = (block) => {
   delete block.synched;
   return block;
 };
 
-const textToArray = (obj, keys) => {
+let textToArray = (obj, keys) => {
   for (key of keys) {
     if (key in obj && !isNullOrUndefined(obj[key])) {
       obj[key] = obj[key].split(',');

@@ -17,7 +17,7 @@ class DalParser {
   }
 
   generateAccountsTableParsers() {
-    const bigIntegerFields = [
+    let bigIntegerFields = [
       accountsTable.field.lastTransactionTimestamp,
       accountsTable.field.nextSigKeyIndex,
       accountsTable.field.nextForgingKeyIndex,
@@ -26,7 +26,7 @@ class DalParser {
     ];
     let parsers = [(account) => numberParser(account, bigIntegerFields)];
 
-    const integerFields = [
+    let integerFields = [
       accountsTable.field.requiredSignatureCount,
     ];
     parsers.push((account) => numberParser(account, integerFields));
@@ -35,7 +35,7 @@ class DalParser {
   };
 
   generateTransactionTableParsers() {
-    const bigIntegerFields = [
+    let bigIntegerFields = [
       transactionsTable.field.timestamp,
       transactionsTable.field.nextSigKeyIndex,
       transactionsTable.field.newNextForgingKeyIndex,
@@ -43,11 +43,11 @@ class DalParser {
       transactionsTable.field.newNextSigKeyIndex,
     ];
 
-    const base64Fields = [
+    let base64Fields = [
       transactionsTable.field.signatures,
       transactionsTable.field.error,
     ];
-    const textArrayFields = [
+    let textArrayFields = [
       transactionsTable.field.memberAddresses,
     ];
 
@@ -58,7 +58,7 @@ class DalParser {
       (txn) => textToArray(txn, textArrayFields),
     ];
 
-    const integerFields = [
+    let integerFields = [
       transactionsTable.field.indexInBlock,
       transactionsTable.field.requiredSignatureCount,
     ];
@@ -68,13 +68,13 @@ class DalParser {
   };
 
   generateBlocksTableParser() {
-    const bigIntegerFields = [
+    let bigIntegerFields = [
       blocksTable.field.height,
       blocksTable.field.timestamp,
       blocksTable.field.nextForgingKeyIndex,
     ];
 
-    const base64Fields = [
+    let base64Fields = [
       blocksTable.field.signatures,
     ];
 
@@ -84,10 +84,10 @@ class DalParser {
       removePrivateBlockField,
     ];
 
-    const booleanFields = [
+    let booleanFields = [
       blocksTable.field.active,
     ];
-    const integerFields = [
+    let integerFields = [
       blocksTable.field.numberOfTransactions,
     ];
     parsers.push(
@@ -99,7 +99,7 @@ class DalParser {
   };
 
   generateDelegatesTableParser() {
-    const bigIntegerFields = [delegatesTable.field.updateHeight];
+    let bigIntegerFields = [delegatesTable.field.updateHeight];
     return [
       (delegate) => numberParser(delegate, bigIntegerFields),
     ];
@@ -107,7 +107,7 @@ class DalParser {
 
   generateBallotsTableParser() {
     let parsers = [];
-    const booleanFields = [
+    let booleanFields = [
       ballotsTable.field.active,
     ];
     parsers.push(
